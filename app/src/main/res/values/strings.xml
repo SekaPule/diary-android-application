@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">DiaryApp</string>
+    <string name="recycler_header">Tasks</string>
+    <string name="details_header">Details</string>
+    <string name="time_details">Time:</string>
+    <string name="name_details">Name:</string>
+    <string name="description_details">Description:</string>
+    <string name="time_divider">-</string>
+    <string name="back_button">back_button</string>
+    <string name="minutes">:00</string>
+    <string name="no_tasks_message">No tasks for this day</string>
+    <string name="choose_day_message">Choose the day</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

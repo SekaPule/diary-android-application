@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/niceg/AndroidStudioProjects/DiaryApp/app/src/main/res/drawable/ic_back_arrow.xml" value="0.1055" />
+        <entry key="..\:/Users/niceg/AndroidStudioProjects/DiaryApp/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.1055" />
+        <entry key="..\:/Users/niceg/AndroidStudioProjects/DiaryApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1055" />
+        <entry key="..\:/Users/niceg/AndroidStudioProjects/DiaryApp/app/src/main/res/layout/activity_main.xml" value="0.18" />
+        <entry key="..\:/Users/niceg/AndroidStudioProjects/DiaryApp/app/src/main/res/layout/activity_task_details.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/niceg/AndroidStudioProjects/DiaryApp/app/src/main/res/layout/fragment_add_task_screen.xml" value="0.33" />
+        <entry key="..\:/Users/niceg/AndroidStudioProjects/DiaryApp/app/src/main/res/layout/fragment_blank.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/niceg/AndroidStudioProjects/DiaryApp/app/src/main/res/layout/fragment_choose_tasks.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/niceg/AndroidStudioProjects/DiaryApp/app/src/main/res/layout/fragment_details_screen.xml" value="0.1" />
+        <entry key="..\:/Users/niceg/AndroidStudioProjects/DiaryApp/app/src/main/res/layout/fragment_no_tasks.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/niceg/AndroidStudioProjects/DiaryApp/app/src/main/res/layout/fragment_tasks_list.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/niceg/AndroidStudioProjects/DiaryApp/app/src/main/res/layout/fragment_tasks_screen.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/niceg/AndroidStudioProjects/DiaryApp/app/src/main/res/layout/item_task_layout.xml" value="0.17074275362318841" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

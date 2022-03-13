@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/vertical_margin"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:layout_width="@dimen/button_size"
+            android:layout_height="@dimen/button_size"
+            android:id="@+id/home_button"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            android:contentDescription="@string/back_button"
+            android:background="@null"/>
+
+        <TextView
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/header_text_size"
+            android:text="@string/details_header"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/vertical_margin"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size"
+                android:text="@string/time_details"
+                android:layout_marginEnd="@dimen/horizontal_margin"/>
+            <TextView
+                android:id="@+id/details_start_time"
+                android:layout_width="wrap_content"
+                android:textSize="@dimen/text_size"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size"
+                android:text="@string/minutes"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="@dimen/text_size"
+                android:layout_height="wrap_content"
+                android:text="@string/time_divider"/>
+
+            <TextView
+                android:id="@+id/details_finish_time"
+                android:layout_width="wrap_content"
+                android:textSize="@dimen/text_size"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size"
+                android:text="@string/minutes"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/vertical_margin"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size"
+                android:text="@string/name_details"
+                android:layout_marginEnd="@dimen/horizontal_margin"/>
+            <TextView
+                android:id="@+id/details_task_name"
+                android:layout_width="wrap_content"
+                android:textSize="@dimen/text_size"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/vertical_margin"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size"
+                android:text="@string/description_details"
+                android:layout_marginEnd="@dimen/horizontal_margin"/>
+            <TextView
+                android:id="@+id/details_task_description"
+                android:layout_width="wrap_content"
+                android:textSize="@dimen/text_size"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
