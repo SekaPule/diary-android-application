@@ -61,6 +61,14 @@ class TasksScreenFragment(private val activityContext: Context) : Fragment() {
                 }
             }
         }
+
+        binding.addTaskButton.setOnClickListener {
+            parentFragmentManager.commit {
+                replace(R.id.screen_fragment_holder, AddTasksScreenFragment.newInstance())
+                setReorderingAllowed(true)
+                addToBackStack(null)
+            }
+        }
     }
 
     override fun onStart() {

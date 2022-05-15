@@ -37,6 +37,10 @@ android {
 
 dependencies {
 
+    def material_version= "1.5.0"
+
+    implementation "com.google.android.material:material:$material_version"
+
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.fragment:fragment:1.4.1'
     def lifecycle_version = "2.5.0-alpha03"
