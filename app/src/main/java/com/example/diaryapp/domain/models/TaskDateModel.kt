@@ -2,7 +2,7 @@ package com.example.diaryapp.domain.models
 
 import java.io.Serializable
 
-data class DateTaskModel(
+data class TaskDateModel(
     var year: Int,
     var month: Int,
     var day: Int

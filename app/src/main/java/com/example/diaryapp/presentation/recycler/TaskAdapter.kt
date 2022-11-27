@@ -9,7 +9,7 @@ import com.example.diaryapp.domain.models.TaskModel
 
 class TaskAdapter(
     private val context: Context,
-    private val items: ArrayList<TaskModel>,
+    private val items: List<TaskModel>,
     private val onTaskClickListener: OnTaskClickListener,
 ) :
     RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
@@ -25,12 +25,10 @@ class TaskAdapter(
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-
-
         val item = items[position]
 
-        holder.binding.taskStartTime.text = item.dateStart.hour.toString()
-        holder.binding.taskFinishTime.text = item.dateFinish.hour.toString()
+        holder.binding.taskStartTime.text = item.dateTimeStart.hour.toString()
+        holder.binding.taskFinishTime.text = item.dateTimeFinish.hour.toString()
         holder.binding.taskName.text = item.name
 
         holder.itemView.setOnClickListener {

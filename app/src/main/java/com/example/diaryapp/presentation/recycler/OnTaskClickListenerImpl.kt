@@ -13,7 +13,7 @@ class OnTaskClickListenerImpl(
 ) : OnTaskClickListener {
     override fun onTaskItemClicked(item: TaskModel) {
         fragmentManager.commit {
-            replace(R.id.screen_fragment_holder,DetailsScreenFragment.newInstance(item = item, context = context))
+            replace(R.id.screen_fragment_holder,DetailsScreenFragment.newInstance(item = item))
             setReorderingAllowed(true)
             addToBackStack("details")
         }

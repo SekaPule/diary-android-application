@@ -4,6 +4,7 @@ import android.app.Application
 import com.example.diaryapp.di.appModule
 import com.example.diaryapp.di.dataModule
 import com.example.diaryapp.di.domainModule
+import com.example.diaryapp.di.taskListDatabaseModule
 import org.koin.android.BuildConfig
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -17,7 +18,7 @@ class App : Application() {
         startKoin {
             androidLogger(if (BuildConfig.DEBUG) Level.ERROR else Level.NONE)
             androidContext(this@App)
-            modules(listOf(appModule, domainModule, dataModule))
+            modules(listOf(appModule, domainModule, dataModule, taskListDatabaseModule))
         }
     }
 }

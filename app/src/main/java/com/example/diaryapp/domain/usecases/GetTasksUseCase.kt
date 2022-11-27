@@ -1,26 +1,20 @@
 package com.example.diaryapp.domain.usecases
 
-import com.example.diaryapp.domain.models.DateTaskModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
+import androidx.lifecycle.map
+import com.example.diaryapp.data.room.dao.TaskEntity
+import com.example.diaryapp.data.room.dao.toTaskModel
 import com.example.diaryapp.domain.models.TaskModel
 import com.example.diaryapp.domain.repository.TaskRepository
 
 
 class GetTasksUseCase(private val taskRepository: TaskRepository) {
 
-    fun execute(fileName: String, dateTask: DateTaskModel): ArrayList<TaskModel> {
-
-        val fullTasksArray = taskRepository.getTasksFromAssets(fileName = fileName)
-        val selectedByDateTasks: ArrayList<TaskModel> = ArrayList()
-
-        for (i in 0 until fullTasksArray.size) {
-            if (fullTasksArray[i].dateStart.year == dateTask.year &&
-                fullTasksArray[i].dateStart.monthValue == dateTask.month &&
-                fullTasksArray[i].dateStart.dayOfMonth == dateTask.day
-            ) {
-                selectedByDateTasks.add(fullTasksArray[i])
+    fun execute(dateTimestamp: Long): LiveData<List<TaskModel>> =
+        Transformations.map(taskRepository.loadTasksByDate(dateTimestamp = dateTimestamp)) { entity ->
+            entity.map {
+                it.toTaskModel()
             }
         }
-
-        return selectedByDateTasks
-    }
 }

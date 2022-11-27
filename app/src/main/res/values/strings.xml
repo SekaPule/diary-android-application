@@ -10,9 +10,12 @@
     <string name="minutes">:00</string>
     <string name="no_tasks_message">No tasks for this day</string>
     <string name="choose_day_message">Choose the day</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="task_name">Task name</string>
     <string name="task_description">Task description</string>
     <string name="add_task">add task</string>
+    <string name="toast_success_message">Task added!</string>
+    <string name="main_helper_text">Required field</string>
+    <string name="task_date">Task Date</string>
+    <string name="start_time">Start Time</string>
+    <string name="finish_time">Finish Time</string>
 </resources>

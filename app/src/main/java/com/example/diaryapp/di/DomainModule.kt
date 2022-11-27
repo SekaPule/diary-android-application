@@ -1,10 +1,14 @@
 package com.example.diaryapp.di
 
+import com.example.diaryapp.domain.usecases.AddTasksUseCase
 import com.example.diaryapp.domain.usecases.GetTasksUseCase
 import org.koin.dsl.module
 
 val domainModule = module {
-    factory<GetTasksUseCase> {
+    single<GetTasksUseCase> {
         GetTasksUseCase(taskRepository = get())
+    }
+    single<AddTasksUseCase> {
+        AddTasksUseCase(taskRepository = get())
     }
 }

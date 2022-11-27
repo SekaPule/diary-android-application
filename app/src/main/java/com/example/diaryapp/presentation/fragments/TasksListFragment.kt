@@ -17,7 +17,7 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class TasksListFragment(private val activityContext: Context) : Fragment() {
     private lateinit var binding : FragmentTasksListBinding
-    private lateinit var observer: Observer<ArrayList<TaskModel>>
+    private lateinit var observer: Observer<List<TaskModel>>
     private val onTaskClickListener by lazy {
         OnTaskClickListenerImpl(parentFragmentManager,
             activityContext)
@@ -36,33 +36,30 @@ class TasksListFragment(private val activityContext: Context) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.rvTasksList.layoutManager = LinearLayoutManager(activityContext)
 
-        observer = Observer {
-            itemAdapter = TaskAdapter(context = activityContext,
-                items = it,
-                onTaskClickListener = onTaskClickListener)
-            binding.rvTasksList.adapter = itemAdapter
-        }
-
-        vm.liveTaskList.observe(viewLifecycleOwner, observer)
-    }
-
-    override fun onStart() {
-        super.onStart()
         if (vm.liveCalendarDayPosition.value?.day != null) {
             itemAdapter = TaskAdapter(
                 context = activityContext,
-                items = vm.liveTaskList.value!!,
+                items = if(vm.taskList()!!.value == null) listOf() else vm.taskList()!!.value!!,
                 onTaskClickListener = onTaskClickListener
             )
             binding.rvTasksList.adapter = itemAdapter
         }
+
+        observer = Observer {
+            itemAdapter = TaskAdapter(context = activityContext,
+                items = it ?: listOf(),
+                onTaskClickListener = onTaskClickListener)
+            binding.rvTasksList.adapter = itemAdapter
+        }
+        binding.rvTasksList.layoutManager = LinearLayoutManager(activityContext)
+
+       vm.taskList()!!.observe(viewLifecycleOwner, observer)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        vm.liveTaskList.removeObserver(observer)
+        vm.taskList()!!.removeObserver(observer)
     }
 
     companion object {

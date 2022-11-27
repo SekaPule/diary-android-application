@@ -7,19 +7,27 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
+import androidx.lifecycle.Observer
 import com.example.diaryapp.R
 import com.example.diaryapp.databinding.FragmentTasksScreenBinding
+import com.example.diaryapp.domain.models.TaskModel
 import com.example.diaryapp.presentation.fragments.NoTasksFragment
 import com.example.diaryapp.presentation.fragments.TasksListFragment
 import com.example.diaryapp.presentation.vm.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.util.*
 
-private const val ONE_MONTH_DIFFERENCE = 1
+const val ONE_MONTH_DIFFERENCE = 1
 
 class TasksScreenFragment(private val activityContext: Context) : Fragment() {
     private lateinit var binding: FragmentTasksScreenBinding
     private val vm by sharedViewModel<MainViewModel>()
+    private lateinit var observer: Observer<List<TaskModel>>
+
+    private val calendar: Calendar = Calendar.getInstance()
+    private val year = calendar.get(Calendar.YEAR)
+    private val month = calendar.get(Calendar.MONTH)
+    private val day = calendar.get(Calendar.DAY_OF_MONTH)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,7 +39,23 @@ class TasksScreenFragment(private val activityContext: Context) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val calendar = Calendar.getInstance()
+
+        observer = Observer {
+            if (it.isEmpty()) {
+                parentFragmentManager.commit {
+                    replace(R.id.list_fragment_container, NoTasksFragment.newInstance())
+                    setReorderingAllowed(true)
+                }
+            } else {
+                parentFragmentManager.commit {
+                    replace(
+                        R.id.list_fragment_container,
+                        TasksListFragment.newInstance(context = activityContext)
+                    )
+                    setReorderingAllowed(true)
+                }
+            }
+        }
 
         if (vm.liveCalendarDayPosition.value?.day != null) {
             calendar.set(
@@ -40,26 +64,41 @@ class TasksScreenFragment(private val activityContext: Context) : Fragment() {
                 vm.liveCalendarDayPosition.value!!.day
             )
             binding.calendarView.date = calendar.timeInMillis
+        } else {
+            vm.storeCalendarDayPosition(
+                day = day,
+                month = month + ONE_MONTH_DIFFERENCE,
+                year = year
+            )
         }
 
-        binding.calendarView.setOnDateChangeListener { _, year, month, day ->
-            vm.storeCalendarDayPosition(year = year,
-                month = month + ONE_MONTH_DIFFERENCE,
-                day = day)
-            vm.getTasks()
+        vm.loadTasks()
+        vm.taskList()!!.observe(viewLifecycleOwner, observer)
 
-            if (vm.liveTaskList.value?.isEmpty() == true) {
-                parentFragmentManager.commit {
-                    replace(R.id.list_fragment_container, NoTasksFragment.newInstance())
-                    setReorderingAllowed(true)
+        binding.calendarView.setOnDateChangeListener { _, mYear, mMonth, mDay ->
+            vm.storeCalendarDayPosition(
+                year = mYear,
+                month = mMonth + ONE_MONTH_DIFFERENCE,
+                day = mDay
+            )
+            vm.loadTasks()
+
+            vm.taskList()!!.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+                if (it.isEmpty()) {
+                    parentFragmentManager.commit {
+                        replace(R.id.list_fragment_container, NoTasksFragment.newInstance())
+                        setReorderingAllowed(true)
+                    }
+                } else {
+                    parentFragmentManager.commit {
+                        replace(
+                            R.id.list_fragment_container,
+                            TasksListFragment.newInstance(context = activityContext)
+                        )
+                        setReorderingAllowed(true)
+                    }
                 }
-            } else {
-                parentFragmentManager.commit {
-                    replace(R.id.list_fragment_container,
-                        TasksListFragment.newInstance(context = activityContext))
-                    setReorderingAllowed(true)
-                }
-            }
+            })
         }
 
         binding.addTaskButton.setOnClickListener {
@@ -71,21 +110,11 @@ class TasksScreenFragment(private val activityContext: Context) : Fragment() {
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        if (vm.liveTaskList.value?.isEmpty() == true) {
-            parentFragmentManager.commit {
-                replace(R.id.list_fragment_container, NoTasksFragment.newInstance())
-                setReorderingAllowed(true)
-            }
-        } else {
-            parentFragmentManager.commit {
-                replace(R.id.list_fragment_container,
-                    TasksListFragment.newInstance(context = activityContext))
-                setReorderingAllowed(true)
-            }
-        }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        vm.taskList()!!.removeObserver(observer)
     }
+
     companion object {
         @JvmStatic
         fun newInstance(context: Context) = TasksScreenFragment(activityContext = context)
