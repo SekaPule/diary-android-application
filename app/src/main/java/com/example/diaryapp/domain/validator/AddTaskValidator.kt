@@ -34,7 +34,7 @@ class AddTaskValidator(private val binding: FragmentAddTasksScreenBinding) {
     }
 
     private fun validateTaskDate(): Boolean {
-        if (binding.datePickerBtn.text=="Task Date") {
+        if (binding.datePickerBtn.text==TASK_DATE_TEXT) {
             binding.datePickerBtnLayout.error = WARNING_TEXT
             binding.datePickerBtn.requestFocus()
             return false
@@ -45,7 +45,7 @@ class AddTaskValidator(private val binding: FragmentAddTasksScreenBinding) {
     }
 
     private fun validateTaskTimeStart(): Boolean {
-        if (binding.timeStartPickerBtn.text=="Start Time") {
+        if (binding.timeStartPickerBtn.text==START_TIME_TEXT) {
             binding.timeStartPickerBtnLayout.error = WARNING_TEXT
             binding.timeStartPickerBtn.requestFocus()
             return false
@@ -56,7 +56,7 @@ class AddTaskValidator(private val binding: FragmentAddTasksScreenBinding) {
     }
 
     private fun validateTaskTimeFinish(): Boolean {
-        if (binding.timeFinishPickerBtn.text=="Finish Time") {
+        if (binding.timeFinishPickerBtn.text==FINISH_TIME_TEXT) {
             binding.timeFinishPickerBtnLayout.error = WARNING_TEXT
             binding.timeFinishPickerBtn.requestFocus()
             return false
@@ -99,5 +99,8 @@ class AddTaskValidator(private val binding: FragmentAddTasksScreenBinding) {
     }
     companion object{
         private const val WARNING_TEXT = "Required field"
+        private const val TASK_DATE_TEXT = "Task Date"
+        private const val FINISH_TIME_TEXT = "Finish Time"
+        private const val START_TIME_TEXT = "Start Time"
     }
 }
